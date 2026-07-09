@@ -35,8 +35,8 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--bg-cream);
-            color: var(--dark-cocoa);
+            background-color: #FAF8F4; /* Fallback direct color */
+            color: #47362D;            /* Fallback direct color */
             overflow-x: hidden;
         }
 
@@ -165,7 +165,8 @@
                 <!-- Whimsical Polaroid Frame Display -->
                 <div class="absolute w-52 p-3.5 bg-white rounded-2xl soft-shadow transform animate-float border border-[#E6D7C5]/20">
                     <div class="relative aspect-[3/4] w-full rounded-lg mb-3 overflow-hidden border border-[#F5EFE7] bg-[#F5EFE7]/60 flex flex-col items-center justify-center">
-                        <div class="absolute inset-0 bg-gradient-to-tr from-[#E9C7CC] via-[#champagne] to-[#A9B98C] blur-xl opacity-60"></div>
+                        <!-- FIXED: Replaced custom variable placeholder with actual hex matching your theme -->
+                        <div class="absolute inset-0 bg-gradient-to-tr from-[#E9C7CC] via-[#E6D7C5] to-[#A9B98C] blur-xl opacity-60"></div>
                         <span class="relative font-serif text-3xl text-[#5E4A42]/60 font-light select-none">?</span>
                     </div>
                     <div class="font-accent text-lg text-center text-[#DFAFB6]">forever with you</div>
@@ -373,7 +374,7 @@
                     <div id="scrapbookWall" class="grid grid-cols-1 sm:grid-cols-2 gap-8 items-start">
                         
                         <!-- Seed Post Demo -->
-                        <div id="welcomeSeedPost" class="bg-white p-5 rounded-[24px] shadow-sm border border-[#F4CCD3]/40 relative group jello-bounce flex flex-col bg-[#FFF8E7]/60">
+                        <div id="welcomeSeedPost" class="p-5 rounded-[24px] shadow-sm border border-[#F4CCD3]/40 relative group jello-bounce flex flex-col bg-[#FFF8E7]/60">
                             <div class="absolute -top-3 left-1/3 w-20 h-5 washi-tape flex items-center justify-center text-[9px] uppercase tracking-wider text-[#7A6253]/60 font-medium">customer log</div>
                             <div class="space-y-3 pt-1 flex-grow">
                                 <div class="flex justify-between items-center">
@@ -413,12 +414,12 @@
             <h2 class="text-2xl font-serif font-light uppercase tracking-widest text-[#47362D]">Print Inspiration</h2>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <div class="bg-white p-6 rounded-[24px] soft-shadow border border-[#E6D7C5]/30 flex flex-col justify-center items-center text-center bg-[#F7F2EB]/40">
+            <div class="p-6 rounded-[24px] soft-shadow border border-[#E6D7C5]/30 flex flex-col justify-center items-center text-center bg-[#F7F2EB]/40">
                 <span class="text-2xl text-[#5E4A42] mb-3">✉︎</span>
                 <h5 class="font-serif text-lg font-medium text-[#47362D]">Personalized Freebies</h5>
                 <p class="text-xs text-[#5E4A42] font-light mt-1.5 leading-relaxed max-w-sm">Every order is matched with mini surprises, stickers, or artwork based on your selected fandom availability.</p>
             </div>
-            <div class="bg-white p-6 rounded-[24px] soft-shadow border border-[#E6D7C5]/30 flex flex-col justify-center items-center text-center bg-[#A9B98C]/10">
+            <div class="p-6 rounded-[24px] soft-shadow border border-[#E6D7C5]/30 flex flex-col justify-center items-center text-center bg-[#A9B98C]/10">
                 <span class="text-2xl text-[#8D9E72] mb-3">✦</span>
                 <h5 class="font-serif text-lg font-medium text-[#47362D]">Design Preview</h5>
                 <p class="text-xs text-[#5E4A42] font-light mt-1.5 leading-relaxed max-w-sm">No blind printing! You receive a digital mock-up layout to confirm on Instagram before it heads to the cutting board.</p>
@@ -527,7 +528,7 @@
             
             const card = document.createElement('div');
             card.id = cardId;
-            card.className = "bg-white p-5 rounded-[24px] shadow-sm border border-[#F4CCD3]/40 relative group jello-bounce flex flex-col";
+            card.className = "p-5 rounded-[24px] shadow-sm border border-[#F4CCD3]/40 relative group jello-bounce flex flex-col";
             card.style.backgroundColor = currentSelectedColor;
             
             let imagesMarkup = '';
