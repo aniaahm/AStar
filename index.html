@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASTAR | Collectibles Studio & Memory Wall</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&family=Parisienne&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-cream: #FAF8F4;
+            --bg-ivory: #F7F2EB;
+            --bg-vanilla: #F5EFE7;
+            --dusty-pink: #E9C7CC;
+            --blush-rose: #DFAFB6;
+            --ribbon-pink: #F3D5DB;
+            --matcha-green: #A9B98C;
+            --sage-green: #B8C3A2;
+            --olive-matcha: #8D9E72;
+            --soft-gold: #D7C4A1;
+            --champagne: #E6D7C5;
+            --dark-cocoa: #47362D;
+            --warm-brown: #5E4A42;
+            --hover-rose: #C99099;
+            --hover-matcha: #8EA26D;
+            --strawberry-glaze: #E29AA7;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-cream);
+            color: var(--dark-cocoa);
+            overflow-x: hidden;
+        }
+
+        .font-serif { font-family: 'Cormorant Garamond', serif; }
+        .font-accent { font-family: 'Parisienne', cursive; }
+
+        .paper-texture {
+            background-image: radial-gradient(rgba(71, 54, 45, 0.03) 1px, transparent 0);
+            background-size: 24px 24px;
+        }
+
+        .pudding-bg {
+            background-image: radial-gradient(rgba(226, 154, 167, 0.12) 1.5px, transparent 0);
+            background-size: 32px 32px;
+        }
+
+        .soft-shadow {
+            box-shadow: 0 12px 35px -10px rgba(94, 74, 66, 0.12);
+        }
+
+        .glass-card {
+            background: rgba(250, 248, 244, 0.82);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(230, 215, 197, 0.5);
+        }
+
+        .soft-gloss {
+            background: rgba(255, 253, 249, 0.88);
+            backdrop-filter: blur(12px);
+            border: 2px solid rgba(244, 204, 211, 0.4);
+        }
+
+        .jello-bounce {
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .jello-bounce:hover {
+            transform: scale(1.02) translateY(-2px);
+        }
+
+        .jello-input:focus {
+            outline: none;
+            border-color: var(--strawberry-glaze);
+            box-shadow: 0 0 0 4px rgba(226, 154, 167, 0.15);
+        }
+
+        .washi-tape {
+            background: rgba(234, 242, 220, 0.85);
+            backdrop-filter: blur(2px);
+            transform: rotate(-2deg);
+        }
+
+        .photo-slider::-webkit-scrollbar { height: 4px; }
+        .photo-slider::-webkit-scrollbar-track { background: transparent; }
+        .photo-slider::-webkit-scrollbar-thumb { background: var(--strawberry-glaze); border-radius: 10px; }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(-4deg); }
+            50% { transform: translateY(-8px) rotate(-2deg); }
+            100% { transform: translateY(0px) rotate(-4deg); }
+        }
+        .animate-float { animation: float 6s ease-in-out infinite; }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-cream); }
+        ::-webkit-scrollbar-thumb { background: var(--champagne); border-radius: 3px; }
+    </style>
+</head>
+<body class="paper-texture antialiased">
+
+    <!-- Announcement Banner -->
+    <div class="w-full py-2.5 text-center text-xs tracking-widest uppercase border-b border-[#E6D7C5] bg-[#F7F2EB] font-light">
+        ✧ Shipping within Dhaka only • Every order includes custom freebies ✧
+    </div>
+
+    <!-- Header / Navigation -->
+    <header class="sticky top-0 z-50 glass-card border-b border-[#E6D7C5]/40 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#" class="text-2xl tracking-[0.3em] font-serif uppercase font-light text-[#47362D]">A S T A R</a>
+            
+            <nav class="hidden md:flex space-x-8 text-xs tracking-widest uppercase font-light">
+                <a href="#fandoms" class="hover:text-[#C99099] transition-colors">Fandoms</a>
+                <a href="#how-to-order" class="hover:text-[#C99099] transition-colors">How to Order</a>
+                <a href="#form-preview" class="hover:text-[#C99099] transition-colors">Order Guidelines</a>
+                <a href="#memory-wall" class="text-[#DFAFB6] font-medium hover:text-[#C99099] transition-colors">Memory Wall ✿</a>
+                <a href="#about" class="hover:text-[#C99099] transition-colors">The Studio</a>
+            </nav>
+
+            <div class="flex items-center">
+                <a href="https://instagram.com/astar.eshop" target="_blank" class="bg-[#A9B98C] text-white px-6 py-2.5 rounded-full text-xs tracking-widest uppercase font-medium hover:bg-[#8EA26D] transition-all soft-shadow">
+                    DM to Order ✉︎
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-[85vh] flex items-center justify-center px-6 overflow-hidden py-12">
+        <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <!-- Left Editorial Text -->
+            <div class="lg:col-span-7 z-10 space-y-6 text-center lg:text-left">
+                <div class="inline-flex items-center gap-2 bg-[#F3D5DB]/60 text-[#47362D] px-4 py-1.5 rounded-full text-xs tracking-widest uppercase">
+                    <span>✧</span> Keepsakes & Custom Prints <span>✧</span>
+                </div>
+                <h1 class="text-4xl sm:text-5xl xl:text-6xl font-serif font-light leading-[1.2] text-[#47362D]">
+                    Collect memories <br><span class="italic font-normal font-serif text-[#DFAFB6]">beautifully.</span>
+                </h1>
+                <p class="text-sm sm:text-base text-[#5E4A42] font-light max-w-xl leading-relaxed mx-auto lg:mx-0">
+                    Custom-made photocards and thoughtfully designed keepsakes—created one order at a time. Handcrafted with love, printed with care, and packed to feel exactly like opening a premium gift.
+                </p>
+                
+                <div class="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                    <a href="https://instagram.com/astar.eshop" target="_blank" class="w-full sm:w-auto text-center bg-[#47362D] text-white px-8 py-4 rounded-full text-xs tracking-widest uppercase font-medium hover:bg-[#5E4A42] transition-all soft-shadow">
+                        Send an Instagram DM
+                    </a>
+                    <a href="#form-preview" class="w-full sm:w-auto text-center border border-[#D7C4A1] text-[#5E4A42] px-8 py-4 rounded-full text-xs tracking-widest uppercase font-light hover:bg-[#F5EFE7] transition-all">
+                        View Form Guidelines
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right Visual Elements -->
+            <div class="lg:col-span-5 relative flex justify-center items-center h-[450px]">
+                <div class="absolute w-64 h-80 bg-[#E6D7C5]/30 rounded-[2rem] transform -rotate-12 translate-x-4"></div>
+                
+                <!-- Whimsical Polaroid Frame Display -->
+                <div class="absolute w-52 p-3.5 bg-white rounded-2xl soft-shadow transform animate-float border border-[#E6D7C5]/20">
+                    <div class="relative aspect-[3/4] w-full rounded-lg mb-3 overflow-hidden border border-[#F5EFE7] bg-[#F5EFE7]/60 flex flex-col items-center justify-center">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-[#E9C7CC] via-[#champagne] to-[#A9B98C] blur-xl opacity-60"></div>
+                        <span class="relative font-serif text-3xl text-[#5E4A42]/60 font-light select-none">?</span>
+                    </div>
+                    <div class="font-accent text-lg text-center text-[#DFAFB6]">forever with you</div>
+                </div>
+
+                <!-- Decorative Background Star Accent -->
+                <div class="absolute font-accent text-6xl text-[#E9C7CC]/40 select-none pointer-events-none -top-4 right-12">༉</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fandom Categories List Section -->
+    <section id="fandoms" class="py-16 bg-[#F7F2EB]/60 border-y border-[#E6D7C5]/40 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <span class="font-accent text-2xl text-[#DFAFB6]">Available for your favorite worlds</span>
+            <h2 class="text-2xl font-serif font-light uppercase tracking-widest mt-2 mb-8 text-[#47362D]">Supported Fandoms</h2>
+            
+            <div class="flex flex-wrap justify-center gap-3 max-w-3xl mx-auto">
+                <span class="bg-white border border-[#E6D7C5] px-6 py-2.5 rounded-xl text-sm font-medium tracking-wide text-[#47362D] shadow-sm">BL</span>
+                <span class="bg-white border border-[#E6D7C5] px-6 py-2.5 rounded-xl text-sm font-medium tracking-wide text-[#47362D] shadow-sm">GL</span>
+                <span class="bg-white border border-[#E6D7C5] px-6 py-2.5 rounded-xl text-sm font-medium tracking-wide text-[#47362D] shadow-sm">Anime</span>
+                <span class="bg-white border border-[#E6D7C5] px-6 py-2.5 rounded-xl text-sm font-medium tracking-wide text-[#47362D] shadow-sm">K-pop</span>
+                <span class="bg-white border border-[#E6D7C5] px-6 py-2.5 rounded-xl text-sm font-medium tracking-wide text-[#47362D] shadow-sm">T-pop</span>
+                <span class="bg-white border border-[#E6D7C5] px-6 py-2.5 rounded-xl text-sm font-medium tracking-wide text-[#47362D] shadow-sm">k-drama</span>
+                <span class="bg-white border border-[#E6D7C5] px-6 py-2.5 rounded-xl text-sm font-medium tracking-wide text-[#47362D] shadow-sm">c-drama</span>
+                <span class="bg-white border border-[#E6D7C5] px-6 py-2.5 rounded-xl text-sm font-medium tracking-wide text-[#47362D] shadow-sm">T-drama</span>
+                <span class="bg-white border border-[#E6D7C5] px-6 py-2.5 rounded-xl text-sm font-medium tracking-wide text-[#47362D] shadow-sm">comics</span>
+                <span class="bg-white border border-[#E6D7C5] px-6 py-2.5 rounded-xl text-sm font-medium tracking-wide text-[#47362D] shadow-sm">Games</span>
+                <span class="bg-white border border-[#E6D7C5] px-6 py-2.5 rounded-xl text-sm font-medium tracking-wide text-[#47362D] shadow-sm italic text-[#A9B98C]">Other</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- How the Studio Order Flow Works -->
+    <section id="how-to-order" class="py-20 px-6">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center space-y-2 mb-14">
+                <h2 class="text-2xl font-serif font-light uppercase tracking-widest">The Order Process</h2>
+                <p class="text-xs tracking-widest text-[#8D9E72] uppercase font-light">Simple, reliable, and thoughtful</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center relative">
+                <div class="space-y-3 p-4">
+                    <div class="w-10 h-10 rounded-full border border-[#D7C4A1] bg-white flex items-center justify-center mx-auto font-serif text-sm">1</div>
+                    <h4 class="font-serif text-lg font-medium">Say Hi on Instagram</h4>
+                    <p class="text-xs text-[#5E4A42] font-light leading-relaxed">Drop a DM to us. I will instantly share the official private Google Order Form link with you!</p>
+                </div>
+                <div class="space-y-3 p-4">
+                    <div class="w-10 h-10 rounded-full border border-[#D7C4A1] bg-white flex items-center justify-center mx-auto font-serif text-sm">2</div>
+                    <h4 class="font-serif text-lg font-medium">Fill out the Form</h4>
+                    <p class="text-xs text-[#5E4A42] font-light leading-relaxed">Pick your matte or glossy finish, upload your high-res imagery, and let me know your favorite biases for your surprise freebies.</p>
+                </div>
+                <div class="space-y-3 p-4">
+                    <div class="w-10 h-10 rounded-full border border-[#D7C4A1] bg-white flex items-center justify-center mx-auto font-serif text-sm">3</div>
+                    <h4 class="font-serif text-lg font-medium">Preview & Approve</h4>
+                    <p class="text-xs text-[#5E4A42] font-light leading-relaxed">I'll send a design preview before printing. Once you say yes, it gets crafted, wrapped with care, and shipped to you in Dhaka!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Order Form Curated Visual Preview Box -->
+    <section id="form-preview" class="py-20 bg-[#F5EFE7]/50 border-t border-[#E6D7C5]/40 px-6">
+        <div class="max-w-3xl mx-auto glass-card rounded-[24px] p-8 sm:p-12 soft-shadow">
+            
+            <!-- Form Header Mockup -->
+            <div class="border-b border-[#E6D7C5] pb-8 mb-8 text-center space-y-3">
+                <div class="text-sm font-serif uppercase tracking-[0.2em] text-[#DFAFB6] flex items-center justify-center gap-2">
+                    <span>✦</span> ASTAR • Custom Photocard Order Form
+                </div>
+                <h3 class="text-2xl font-serif tracking-widest uppercase font-light pt-2">Welcome! 🤍</h3>
+                <p class="text-xs text-[#5E4A42] italic max-w-md mx-auto leading-relaxed">
+                    "Hi, loveeeee! ☁️ Thank you so much for choosing ASTAR! Every photocard is carefully designed, printed, and packed with lots of love, so please take a few minutes to fill out this form accurately."
+                </p>
+            </div>
+
+            <!-- Form Content Outlined Structure -->
+            <div class="space-y-6 text-sm">
+                <div class="p-4 bg-white/40 rounded-xl border border-[#E6D7C5]/40">
+                    <span class="text-[11px] font-medium uppercase tracking-widest text-[#DFAFB6]">👥 SECTION 1 • Customer Information</span>
+                    <p class="text-xs text-[#5E4A42] font-light mt-1">Full Name, Nickname, Phone Number, Extra Phone Number, Email, and Instagram/Facebook Username.</p>
+                </div>
+
+                <div class="p-4 bg-white/40 rounded-xl border border-[#E6D7C5]/40">
+                    <span class="text-[11px] font-medium uppercase tracking-widest text-[#DFAFB6]">📍 SECTION 2 • Delivery Information</span>
+                    <p class="text-xs text-[#5E4A42] font-light mt-1 mb-2">Full Delivery Address, Area Selection, and Preferred Delivery Time.</p>
+                    <p class="text-[11px] text-[#5E4A42]/80 italic font-light">• Note: Shipping is currently available within <b>Dhaka only</b>.</p>
+                </div>
+
+                <div class="p-4 bg-white/40 rounded-xl border border-[#E6D7C5]/40">
+                    <span class="text-[11px] font-medium uppercase tracking-widest text-[#DFAFB6]">🪞 SECTION 3 & 4 • Your Order & Design</span>
+                    <p class="text-xs text-[#5E4A42] font-light mt-1 mb-3">Photocard quantity, upload portal for high-quality images, background color selections, custom text options, and finish choice:</p>
+                    <div class="flex gap-4 text-xs text-[#5E4A42] font-medium mb-3">
+                        <span>○ Matte</span> <span>○ Glossy</span> <span>○ I'm not sure</span>
+                    </div>
+                    <div class="text-[11px] text-[#5E4A42]/80 space-y-1 font-light border-t border-[#E6D7C5]/40 pt-2">
+                        <p>• Please use high-quality photos for the best printing results.</p>
+                        <p>• Colors may vary slightly due to screen and printing differences.</p>
+                    </div>
+                </div>
+
+                <div class="p-4 bg-white/40 rounded-xl border border-[#E6D7C5]/40">
+                    <span class="text-[11px] font-medium uppercase tracking-widest text-[#DFAFB6]">✉︎ SECTION 5 & 6 • Freebies & Permissions</span>
+                    <p class="text-xs text-[#5E4A42] font-light mt-1 mb-3">Which groups, idols, celebrities, or fandoms would make you happiest if you received freebies? Also includes portfolio permission checkboxes for social media showcases.</p>
+                    <div class="text-[11px] text-[#5E4A42]/80 space-y-1 font-light border-t border-[#E6D7C5]/40 pt-2">
+                        <p>• A layout design preview will be sent to your DM before printing.</p>
+                        <p>• Production begins only after your explicit approval has been confirmed.</p>
+                    </div>
+                </div>
+
+                <div class="p-4 bg-[#A9B98C]/10 rounded-xl border border-[#A9B98C]/30 text-xs space-y-1">
+                    <p class="font-medium text-[#8D9E72]">✦ Additional Customizations Included:</p>
+                    <p class="text-[#5E4A42] font-light">Specify if you need your order by a particular date, if it's a gift, or if you would like premium aesthetic gift packaging applied to your parcel!</p>
+                </div>
+            </div>
+
+            <div class="text-center pt-10 border-t border-[#E6D7C5] mt-8 space-y-3">
+                <p class="text-xs text-[#5E4A42]">Ready to bring your dream photocards to life? ✦</p>
+                <a href="https://instagram.com/astar.eshop" target="_blank" class="inline-block bg-[#A9B98C] text-white px-10 py-4 rounded-full text-xs tracking-widest uppercase font-medium hover:bg-[#8EA26D] transition-all soft-shadow">
+                    DM on Instagram to Get the Form Link ✉︎
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- INTEGRATED ASTAR MEMORY WALL SECTION -->
+    <section id="memory-wall" class="py-20 pudding-bg border-t border-[#E6D7C5]/40 px-6 scroll-mt-20">
+        <div class="max-w-7xl mx-auto">
+            
+            <!-- User Customization Card Tool -->
+            <div class="max-w-7xl mx-auto mb-10 p-4 soft-gloss rounded-2xl bg-white flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+                <div class="flex items-center gap-3">
+                    <div id="userAvatar" class="w-10 h-10 rounded-full bg-[#E29AA7] text-white flex items-center justify-center font-bold text-sm shadow-inner">@</div>
+                    <div>
+                        <div class="font-medium text-[#4A3B32]">Your Village Profile: <span id="profileNameDisplay" class="text-[#E29AA7] font-semibold">@loveliest_astar_fan</span></div>
+                        <p class="text-[10px] text-[#7A6253] font-light">Customize your card layout profiles live here!</p>
+                    </div>
+                </div>
+                <div class="flex flex-wrap items-center gap-3">
+                    <input type="text" id="editProfileName" placeholder="Change nickname..." class="p-2 rounded-xl border border-[#F4CCD3] text-[11px] w-40 jello-input transition-all">
+                    <div class="flex items-center gap-1.5 bg-[#FFFDF9] p-1.5 rounded-xl border border-[#F4CCD3]/40">
+                        <button onclick="changeUserTheme('#FFEFF1')" class="w-5 h-5 rounded-full bg-[#FFEFF1] border border-black/10" title="Strawberry Pink"></button>
+                        <button onclick="changeUserTheme('#FFF8E7')" class="w-5 h-5 rounded-full bg-[#FFF8E7] border border-black/10" title="Custard Yellow"></button>
+                        <button onclick="changeUserTheme('#EAF2DC')" class="w-5 h-5 rounded-full bg-[#EAF2DC] border border-black/10" title="Mint Fresh"></button>
+                        <button onclick="changeUserTheme('#F5EFE7')" class="w-5 h-5 rounded-full bg-[#F5EFE7] border border-black/10" title="Warm Caramel"></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Header -->
+            <div class="text-center space-y-3 max-w-2xl mx-auto mb-12">
+                <span class="font-accent text-3xl text-[#E29AA7]">our beautiful community wall</span>
+                <h2 class="text-3xl font-serif font-light tracking-wide uppercase">Astars Memory Wall</h2>
+                <p class="text-xs text-[#7A6253] font-light">
+                    Our beautiful global village! Share your handcrafted setups, choose category labels, and chat live with other collectors below.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                <!-- Post Creation Side -->
+                <div class="lg:col-span-4 soft-gloss p-6 rounded-[28px] space-y-4 bg-white">
+                    <h3 class="font-serif text-lg font-medium text-[#4A3B32]">Pin a New Story ✦</h3>
+
+                    <form id="memoryForm" class="space-y-4 text-xs">
+                        <div class="space-y-1.5">
+                            <label class="block font-medium text-[#4A3B32]">Select World Category</label>
+                            <select id="tagInput" class="w-full p-3 rounded-xl border border-[#F4CCD3] bg-[#FFFDF9] jello-input font-light">
+                                <option value="BL">BL</option>
+                                <option value="GL">GL</option>
+                                <option value="Anime">Anime</option>
+                                <option value="K-pop">K-pop</option>
+                                <option value="T-pop">T-pop</option>
+                                <option value="k-drama">k-drama</option>
+                                <option value="c-drama">c-drama</option>
+                                <option value="T-drama">T-drama</option>
+                                <option value="comics">comics</option>
+                                <option value="Games">Games</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="space-y-1.5">
+                            <label class="block font-medium text-[#4A3B32]">Upload Photos <span class="text-gray-400 font-light">(Up to 10 photos)</span></label>
+                            <div class="relative w-full p-4 rounded-xl border border-dashed border-[#E29AA7] bg-[#FFFDF9] text-center cursor-pointer hover:bg-[#FFEFF1]/40 transition-colors">
+                                <input type="file" id="fileImageInput" accept="image/*" multiple class="absolute inset-0 opacity-0 cursor-pointer">
+                                <span id="fileUploadStatus" class="text-[11px] text-[#7A6253] font-light">📁 Choose local files</span>
+                            </div>
+                            <div id="previewGridContainer" class="hidden grid grid-cols-5 gap-1.5 mt-2 p-1 border border-[#F4CCD3] rounded-xl bg-gray-50/50"></div>
+                        </div>
+
+                        <div class="space-y-1.5">
+                            <label class="block font-medium text-[#4A3B32]">Your Note / Story</label>
+                            <textarea id="storyInput" rows="4" placeholder="How did you style your prints? Write a sweet note..." required 
+                                class="w-full p-3 rounded-xl border border-[#F4CCD3] bg-[#FFFDF9] jello-input font-light leading-relaxed"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full bg-[#E29AA7] text-white py-3 rounded-full text-xs tracking-widest uppercase font-medium hover:bg-[#F4CCD3] hover:text-[#4A3B32] transition-all soft-shadow">
+                            Publish to Memory Wall ✿
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Live Wall Side -->
+                <div class="lg:col-span-8 space-y-6">
+                    <div id="scrapbookWall" class="grid grid-cols-1 sm:grid-cols-2 gap-8 items-start">
+                        
+                        <!-- Seed Post Demo -->
+                        <div id="welcomeSeedPost" class="bg-white p-5 rounded-[24px] shadow-sm border border-[#F4CCD3]/40 relative group jello-bounce flex flex-col bg-[#FFF8E7]/60">
+                            <div class="absolute -top-3 left-1/3 w-20 h-5 washi-tape flex items-center justify-center text-[9px] uppercase tracking-wider text-[#7A6253]/60 font-medium">customer log</div>
+                            <div class="space-y-3 pt-1 flex-grow">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-[10px] font-medium text-[#8D9E72] bg-[#EAF2DC] px-2.5 py-0.5 rounded-full">K-pop</span>
+                                    <span class="text-[11px] text-[#E29AA7]">✦</span>
+                                </div>
+                                <p class="text-xs text-[#4A3B32] font-light leading-relaxed">
+                                    "Welcome to Astars Memory Wall! You can select up to 10 aesthetic product photos directly from your phone storage, attach labels, and converse in the comments!"
+                                </p>
+                                <div class="pt-2 border-t border-[#F4CCD3]/30 text-[10px] tracking-wide font-semibold text-[#7A6253]">
+                                    ✦ By @cozy_kpop_journal
+                                </div>
+                            </div>
+                            
+                            <!-- Comments System -->
+                            <div class="mt-4 pt-3 border-t border-[#F4CCD3]/40 space-y-2">
+                                <div class="text-[10px] font-semibold text-[#4A3B32]">Public Comments:</div>
+                                <div class="space-y-1 text-[11px] font-light text-[#5E4A42] max-h-24 overflow-y-auto" id="comment-box-seed">
+                                    <p class="bg-white/60 p-1.5 rounded-lg"><b class="font-medium text-[#E29AA7]">@jelly_pulls:</b> This look is stunning! can't wait to post mine!</p>
+                                </div>
+                                <div class="flex gap-2 pt-1">
+                                    <input type="text" placeholder="Write comment..." class="w-full p-1.5 border border-[#F4CCD3] rounded-lg text-[10px] jello-input" onkeydown="submitComment(event, 'comment-box-seed')">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lookbook Section -->
+    <section id="lookbook" class="py-20 max-w-7xl mx-auto px-6">
+        <div class="text-center space-y-2 mb-12">
+            <span class="font-accent text-2xl text-[#DFAFB6]">A peek inside the studio</span>
+            <h2 class="text-2xl font-serif font-light uppercase tracking-widest text-[#47362D]">Print Inspiration</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <div class="bg-white p-6 rounded-[24px] soft-shadow border border-[#E6D7C5]/30 flex flex-col justify-center items-center text-center bg-[#F7F2EB]/40">
+                <span class="text-2xl text-[#5E4A42] mb-3">✉︎</span>
+                <h5 class="font-serif text-lg font-medium text-[#47362D]">Personalized Freebies</h5>
+                <p class="text-xs text-[#5E4A42] font-light mt-1.5 leading-relaxed max-w-sm">Every order is matched with mini surprises, stickers, or artwork based on your selected fandom availability.</p>
+            </div>
+            <div class="bg-white p-6 rounded-[24px] soft-shadow border border-[#E6D7C5]/30 flex flex-col justify-center items-center text-center bg-[#A9B98C]/10">
+                <span class="text-2xl text-[#8D9E72] mb-3">✦</span>
+                <h5 class="font-serif text-lg font-medium text-[#47362D]">Design Preview</h5>
+                <p class="text-xs text-[#5E4A42] font-light mt-1.5 leading-relaxed max-w-sm">No blind printing! You receive a digital mock-up layout to confirm on Instagram before it heads to the cutting board.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Editorial Story / About Section -->
+    <section id="about" class="py-20 max-w-5xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
+        <div class="md:col-span-5 bg-[#F7F2EB] p-8 rounded-[24px] border border-[#E6D7C5] text-center space-y-3 soft-shadow">
+            <div class="w-16 h-16 rounded-full bg-white mx-auto flex items-center justify-center text-xl text-[#DFAFB6] border border-[#FAF8F4]">
+                ✦
+            </div>
+            <h4 class="font-serif text-lg tracking-wide">Behind the Studio</h4>
+            <p class="text-xs text-[#5E4A42] leading-relaxed font-light">
+                Deeply inspired by Parisian vintage journals, the soft palettes of cozy aesthetic cafés, and meaningful memory preservation.
+            </p>
+        </div>
+        <div class="md:col-span-7 space-y-4">
+            <span class="font-accent text-2xl text-[#DFAFB6]">Our Philosophy</span>
+            <h3 class="text-2xl sm:text-3xl font-serif font-light uppercase tracking-widest text-[#47362D]">Handcrafted One Pack At A Time</h3>
+            <p class="text-xs sm:text-sm text-[#5E4A42] font-light leading-relaxed">
+                ASTAR is an independent collectibles design studio. We don't believe memories belong trapped inside digital camera rolls. Every layout, paper selection, and curated freebie option is designed to spread absolute happiness from the moment you unwrap your package. Thank you for supporting my dream! ♡
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-[#E6D7C5] bg-[#F5EFE7]/40 py-10 px-6">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between text-[11px] tracking-widest uppercase font-light text-[#5E4A42] space-y-4 md:space-y-0">
+            <div class="font-serif text-lg tracking-[0.25em] text-[#47362D]">ASTAR STUDIO</div>
+            <div class="flex space-x-6">
+                <a href="https://instagram.com/astar.eshop" target="_blank" class="hover:text-[#C99099] transition-colors">Instagram</a>
+                <a href="#" class="hover:text-[#C99099] transition-colors">Facebook</a>
+                <a href="#" class="hover:text-[#C99099] transition-colors">TikTok</a>
+            </div>
+            <div>© 2026 ASTAR STUDIO. ALL RIGHTS RESERVED.</div>
+        </div>
+    </footer>
+
+    <!-- Interactive Workspace Scripts -->
+    <script>
+        let currentSelectedColor = "#FFEFF1";
+        let activeProfileName = "@loveliest_astar_fan";
+        let uploadedImagesBase64Array = [];
+
+        // Realtime Profile Nickname Change Syncer
+        document.getElementById('editProfileName').addEventListener('input', function(e) {
+            let val = e.target.value.trim();
+            if(val !== '') {
+                if(!val.startsWith('@')) val = '@' + val;
+                activeProfileName = val;
+                document.getElementById('profileNameDisplay').innerText = val;
+                document.getElementById('userAvatar').innerText = val.charAt(1).toUpperCase();
+            }
+        });
+
+        function changeUserTheme(hexColor) {
+            currentSelectedColor = hexColor;
+        }
+
+        // Multi-File Local Storage Base64 Parser (Handles max 10 images smoothly)
+        document.getElementById('fileImageInput').addEventListener('change', function(e) {
+            const files = Array.from(e.target.files).slice(0, 10);
+            const container = document.getElementById('previewGridContainer');
+            container.innerHTML = '';
+            uploadedImagesBase64Array = [];
+
+            if(files.length > 0) {
+                document.getElementById('fileUploadStatus').innerText = `✨ ${files.length} photos selected`;
+                container.classList.remove('hidden');
+                
+                files.forEach(file => {
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        uploadedImagesBase64Array.push(event.target.result);
+                        
+                        const imgNode = document.createElement('div');
+                        imgNode.className = "aspect-square rounded-md overflow-hidden bg-gray-200 border border-gray-300";
+                        imgNode.innerHTML = `<img src="${event.target.result}" class="w-full h-full object-cover">`;
+                        container.appendChild(imgNode);
+                    };
+                    reader.readAsDataURL(file);
+                });
+            } else {
+                container.classList.add('hidden');
+                document.getElementById('fileUploadStatus').innerText = `📁 Choose local files`;
+            }
+        });
+
+        // Live Feed Dynamic Generation
+        document.getElementById('memoryForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Check for the welcome card and instantly remove it upon the first real customer submission
+            const seedPost = document.getElementById('welcomeSeedPost');
+            if (seedPost) {
+                seedPost.remove();
+            }
+            
+            const tag = document.getElementById('tagInput').value;
+            const story = document.getElementById('storyInput').value;
+            const wall = document.getElementById('scrapbookWall');
+            const commentBoxId = 'comments-' + Date.now();
+            const cardId = 'card-' + Date.now();
+            
+            const card = document.createElement('div');
+            card.id = cardId;
+            card.className = "bg-white p-5 rounded-[24px] shadow-sm border border-[#F4CCD3]/40 relative group jello-bounce flex flex-col";
+            card.style.backgroundColor = currentSelectedColor;
+            
+            let imagesMarkup = '';
+            if(uploadedImagesBase64Array.length > 0) {
+                imagesMarkup = `
+                    <div class="flex gap-2 overflow-x-auto pb-2 mb-3.5 photo-slider snap-x snap-mandatory">
+                        ${uploadedImagesBase64Array.map(imgData => `
+                            <div class="w-full aspect-[3/4] min-w-full rounded-[16px] overflow-hidden border border-white bg-white/80 snap-center shrink-0">
+                                <img src="${imgData}" class="w-full h-full object-cover">
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+            
+            card.innerHTML = `
+                <div class="absolute -top-3 left-1/3 w-20 h-5 washi-tape flex items-center justify-center text-[9px] uppercase tracking-wider text-[#7A6253]/60 font-medium">customer log</div>
+                
+                <div class="flex justify-between items-center z-10 mb-2">
+                    <span class="text-[10px] font-medium text-[#4A3B32] bg-white/80 px-2.5 py-0.5 rounded-full">${escapeHTML(tag)}</span>
+                    <button onclick="deletePost('${cardId}')" class="text-[10px] text-gray-400 hover:text-red-400 transition-colors tracking-wide font-medium">Delete ✕</button>
+                </div>
+
+                ${imagesMarkup}
+                
+                <div class="space-y-2 flex-grow">
+                    <p class="text-xs text-[#4A3B32] font-light leading-relaxed">"${escapeHTML(story)}"</p>
+                    <div class="pt-2 border-t border-black/5 text-[10px] tracking-wide font-semibold text-[#7A6253]">
+                        ✦ By ${escapeHTML(activeProfileName)}
+                    </div>
+                </div>
+                
+                <div class="mt-4 pt-3 border-t border-black/5 space-y-2">
+                    <div class="text-[10px] font-semibold text-[#4A3B32]">Public Comments:</div>
+                    <div class="space-y-1 text-[11px] font-light text-[#5E4A42] max-h-24 overflow-y-auto" id="${commentBoxId}">
+                        <p class="text-[10px] text-gray-400 italic">No comments yet. Leave a note below!</p>
+                    </div>
+                    <div class="flex gap-2 pt-1">
+                        <input type="text" placeholder="Write comment..." class="w-full p-1.5 border border-[#F4CCD3] rounded-lg text-[10px] bg-white jello-input" onkeydown="submitComment(event, '${commentBoxId}')">
+                    </div>
+                </div>
+            `;
+            
+            wall.insertBefore(card, wall.firstChild);
+            
+            document.getElementById('memoryForm').reset();
+            document.getElementById('previewGridContainer').classList.add('hidden');
+            document.getElementById('previewGridContainer').innerHTML = '';
+            document.getElementById('fileUploadStatus').innerText = `📁 Choose local files`;
+            uploadedImagesBase64Array = [];
+        });
+
+        // Delete function logic
+        function deletePost(id) {
+            const postToDrop = document.getElementById(id);
+            if(postToDrop) {
+                postToDrop.style.opacity = '0';
+                postToDrop.style.transform = 'scale(0.9)';
+                setTimeout(() => {
+                    postToDrop.remove();
+                }, 300);
+            }
+        }
+
+        // Comments System submission handler
+        function submitComment(event, targetContainerId) {
+            if (event.key === 'Enter' && event.target.value.trim() !== '') {
+                const commentContainer = document.getElementById(targetContainerId);
+                const inputField = event.target;
+                
+                if(commentContainer.innerText.includes("No comments yet")) {
+                    commentContainer.innerHTML = '';
+                }
+                
+                const newComment = document.createElement('p');
+                newComment.className = "bg-white/60 p-1.5 rounded-lg text-[11px]";
+                newComment.innerHTML = `<b class="font-medium text-[#E29AA7]">${escapeHTML(activeProfileName)}:</b> ${escapeHTML(inputField.value)}`;
+                
+                commentContainer.appendChild(newComment);
+                inputField.value = '';
+                commentContainer.scrollTop = commentContainer.scrollHeight;
+            }
+        }
+
+        function escapeHTML(str) {
+            return str.replace(/[&<>'"]/g, tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag));
+        }
+    </script>
+</body>
+</html>
